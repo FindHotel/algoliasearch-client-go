@@ -232,6 +232,15 @@ func (i *Index) Search(query string, opts ...interface{}) (res QueryRes, err err
 	return
 }
 
+// SearchTyped performs a search query according to the given query string and any
+// given query parameter among all the index records.
+func (i *Index) SearchTyped(query string, res interface{}, opts ...interface{}) (err error) {
+	body := searchReq{Params: transport.URLEncode(newSearchParams(query, opts...))}
+	path := i.path("/query")
+	err = i.transport.Request(&res, http.MethodPost, path, body, call.Read, opts...)
+	return
+}
+
 // FindObject searches iteratively through the search response `Hits`
 // field to find the first response hit that would match against the given
 // `filterFunc` function.

@@ -92,7 +92,7 @@ func TestUnmarshallTo(t *testing.T) {
 		expectedError error
 		expectedBody  fakeStruct
 	}{
-		{"<html>Non json answer</html>", fmt.Errorf("cannot deserialize response's body: invalid character '<' looking for beginning of value: <html>Non json answer</html>"), fakeStruct{}},
+		{"<html>Non json answer</html>", fmt.Errorf("cannot deserialize response's body: invalid character '<' looking for beginning of value"), fakeStruct{}},
 		{`{"attr":"value"}`, nil, fakeStruct{"value"}},
 	} {
 		bodyDeserialized := fakeStruct{}
