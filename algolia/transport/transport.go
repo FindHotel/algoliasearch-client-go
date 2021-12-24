@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net"
 	"net/http"
 	"runtime"
@@ -307,14 +306,10 @@ func buildRequest(
 }
 
 func unmarshalTo(r io.ReadCloser, v interface{}) error {
-	body, err := ioutil.ReadAll(r)
+	err := json.NewDecoder(r).Decode(&v)
 	errClose := r.Close()
 	if err != nil {
-		return fmt.Errorf("cannot read body: %v", err)
-	}
-	err = json.Unmarshal(body, &v)
-	if err != nil {
-		return fmt.Errorf("cannot deserialize response's body: %v: %s", err, string(body))
+		return fmt.Errorf("cannot deserialize response's body: %v", err)
 	}
 	if errClose != nil {
 		return fmt.Errorf("cannot close response's body: %v", errClose)
