@@ -1,4 +1,4 @@
-module github.com/algolia/algoliasearch-client-go/v3
+module github.com/FindHotel/algoliasearch-client-go/v3
 
 go 1.13
 
