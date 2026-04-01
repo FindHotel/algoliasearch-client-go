@@ -42,6 +42,49 @@ type QueryRes struct {
 	RenderingContent           *RenderingContent                 `json:"renderingContent"`
 }
 
+// QueryResNoHits is like QueryRes but without hits.
+// Clients need to embed this structure to their struct with Hits field.
+//
+// Example:
+//  type Response struct {
+//		QueryResNoHits
+//		Hits []int `json:"Hits"`
+//  }
+type QueryResNoHits struct {
+	AppliedRules               []AppliedRule                     `json:"appliedRules"`
+	AppliedRelevancyStrictness int                               `json:"appliedRelevancyStrictness"`
+	AroundLatLng               string                            `json:"aroundLatLng"`
+	AutomaticRadius            string                            `json:"automaticRadius"`
+	ExhaustiveFacetsCount      bool                              `json:"exhaustiveFacetsCount"`
+	ExhaustiveNbHits           bool                              `json:"exhaustiveNbHits"`
+	Explain                    map[string]map[string]interface{} `json:"explain"`
+	Extensions                 map[string]map[string]interface{} `json:"extensions"`
+	Facets                     map[string]map[string]int         `json:"facets"`
+	FacetsStats                map[string]FacetStat              `json:"facets_stats"`
+	HitsPerPage                int                               `json:"hitsPerPage"`
+	Index                      string                            `json:"index"`
+	IndexUsed                  string                            `json:"indexUsed"`
+	Length                     int                               `json:"length"`
+	Message                    string                            `json:"message"`
+	NbHits                     int                               `json:"nbHits"`
+	NbPages                    int                               `json:"nbPages"`
+	NbSortedHits               int                               `json:"nbSortedHits"`
+	Offset                     int                               `json:"offset"`
+	Page                       int                               `json:"page"`
+	Params                     string                            `json:"params"`
+	ParsedQuery                string                            `json:"parsedQuery"`
+	ProcessingTimeMS           int                               `json:"processingTimeMS"`
+	Query                      string                            `json:"query"`
+	QueryAfterRemoval          string                            `json:"queryAfterRemoval"`
+	QueryID                    string                            `json:"queryID"`
+	ServerUsed                 string                            `json:"serverUsed"`
+	TimeoutCounts              bool                              `json:"timeoutCounts"`
+	TimeoutHits                bool                              `json:"timeoutHits"`
+	UserData                   []interface{}                     `json:"userData"`
+	ABTestVariantID            int                               `json:"abTestVariantID"`
+	RenderingContent           *RenderingContent                 `json:"renderingContent"`
+}
+
 type AppliedRule struct {
 	ObjectID string `json:"objectID"`
 }
